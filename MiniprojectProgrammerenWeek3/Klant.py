@@ -1,7 +1,7 @@
 __author__ = 'jouke-bouwe'
 
 import csv
-csvKlantBestand = 'C:/Users/jouke-bouwe/Documents/School/schoolOpdrachten/MiniprojectProgrammerenWeek3/klantBestand.csv'
+csvKlantBestand = 'C:/Users\jouke-bouwe/Documents/School/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
 
 #variablen voor het registreren en opslag
 email = ""
@@ -39,7 +39,7 @@ def leesUit():
     inlogWachtwoord = input("Geef je wachtwoord")
 
     try:
-        LeesKlantUit = open(csvKlantBestand, 'r')
+        leesKlantUit = open(csvKlantBestand, 'r')
         reader = csv.DictReader(leesKlantUit, delimiter='\n')
 
         for row in reader:
