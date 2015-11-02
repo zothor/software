@@ -1,2 +1,1 @@
-__author__ = 'Rica'
-aaiodjasod
+__author__ = 'Ricardo'
