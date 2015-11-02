@@ -1,11 +1,9 @@
 __author__ = 'jouke-bouwe'
 
-import MiniprojectProgrammerenWeek3.Klant
+from MiniprojectProgrammerenWeek3 import Klant
 import datetime
 
-MiniprojectProgrammerenWeek3.Klant.leesUit()
-
-
+Klant.leesUit()
 
 
 
