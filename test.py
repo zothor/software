@@ -1,7 +1,7 @@
 __author__ = 'kevin'
 
 from tkinter import *
-
+self.parent.title("Simple GUI")
 root = Tk()
 Topframe = Frame(root)
 Topframe.pack()
