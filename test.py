@@ -1,3 +1,3 @@
 __author__ = 'kevin'
 
-from tkinter import
+from tkinter import *
