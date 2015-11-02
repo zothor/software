@@ -8,7 +8,7 @@ Topframe.pack()
 bottomframe = Frame(root)
 bottomframe.pack(side=BOTTOM)
 
-button_1 = Button(Topframe, text= "inloggen", fg= "red")
+button_1 = Button(Topframe, text= "click here", fg= "red")
 button_2 = Button(Topframe, text= "click here", fg= "green")
 button_3 = Button(Topframe, text= "click here", fg= "yellow")
 button_4 = Button(bottomframe, text= "click here", fg= "blue")
