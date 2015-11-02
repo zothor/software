@@ -1,6 +1,7 @@
 __author__ = 'jouke-bouwe'
 
 import csv
+import ast
 csvKlantBestand = 'C:/Users\jouke-bouwe/Documents/School/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
 
 #variablen voor het registreren en opslag
@@ -27,7 +28,7 @@ def sign(email, wachtwoord, naam, achternaam):
     if wachtwoord == wachtwoord2:
         try:
             klantBestand = open(csvKlantBestand, 'a')
-            klantBestand.write(str({"email":email,"wachtwoord":wachtwoord,"naam":naam,"achternaam":achternaam})+"\n")
+            writer = csv.DictWriter({"email":email,"wachtwoord":wachtwoord,"naam":naam,"achternaam":achternaam})
             #"," + email + "," + wachtwoord + "," + naam + "," + achernaam + "\n")
 
         finally:
@@ -51,7 +52,7 @@ def leesUit():
         tijdelijk = leesKlantUit[email]
         if inlogEmail == tijdelijk:
             #tijdelijk = leesKlantUit["wachtwoord"]
-            print (tijdelijk)
+            print ("is gelijk")
     finally:
         leesKlantUit.close()
 
