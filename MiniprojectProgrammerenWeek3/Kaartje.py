@@ -7,6 +7,8 @@ MiniprojectProgrammerenWeek3.Klant.leesUit()
 
 
 
+
+
 huidigeTijd = datetime.datetime.now()
 
 
