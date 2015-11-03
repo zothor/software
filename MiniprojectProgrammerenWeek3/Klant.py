@@ -15,10 +15,17 @@ wachtwoord2 = ""
 inlogEmail = ""
 inlogWachtwoord = ""
 
-fieldnames = {"email", "wachtwoord", "naam", "achternaam"}
+fieldnames = ["email", "wachtwoord", "naam", "achternaam"]
+
+
+def maakDictionaryHeaders():
+    klantBestand = open(csvKlantBestand, 'a', newline='')
+    writer = csv.writer(klantBestand,dialect='excel')
+    writer.writerow(fieldnames)
 
 #In deze functie slaan we de gegevens van de klant op in een csv bestand.
-def sign(email, wachtwoord, naam, achternaam):
+
+def registreren(email, wachtwoord, naam, achternaam):
 
     email = input("Vul hier je e-mail adress in")
     wachtwoord = input("Vul hier je wachtwoord in")
@@ -28,15 +35,16 @@ def sign(email, wachtwoord, naam, achternaam):
 
     if wachtwoord == wachtwoord2:
         try:
-            klantBestand = open(csvKlantBestand, 'a')
-            writer = csv.DictWriter(klantBestand, fieldnames=fieldnames)
-            writer.writerow({"email": email + " ", "wachtwoord": wachtwoord + " ", "naam":naam + " ", "achternaam": achternaam + " "})
-            #"," + email + "," + wachtwoord + "," + naam + "," + achernaam + "\n")
+            klantBestand = open(csvKlantBestand, 'a', newline='')
+            writer = csv.DictWriter(klantBestand,delimiter=',', fieldnames=fieldnames)
+            writer.writerow({"email": email, "wachtwoord": wachtwoord, "naam":naam, "achternaam": achternaam})
 
         finally:
             klantBestand.close()
     else:
         print("Wachtwoord komt niet overeen")
+
+#leest het csv bestand uit en kijkt of de usergegevens overeenkomen met die hij heeft ingevuld.
 def leesUit():
 
     inlogEmail = input("Geef je e-mail")
@@ -44,17 +52,18 @@ def leesUit():
 
     try:
         leesKlantUit = open(csvKlantBestand, 'r')
-        reader = csv.DictReader(leesKlantUit, delimiter='\n')
+        reader = csv.DictReader(leesKlantUit, delimiter=',')
 
         for row in reader:
             if row["email"] == inlogEmail and row["wachtwoord"] == inlogWachtwoord:
                 print("Inloggen is een succes!")
             else:
-                print("Inloggen is niet gelukt") #key value error
+                print("Inloggen is niet gelukt")
 
     finally:
         leesKlantUit.close()
 
-sign(email, wachtwoord, naam, achternaam)
+maakDictionaryHeaders()
+registreren(email, wachtwoord, naam, achternaam)
 leesUit()
 
