@@ -50,7 +50,7 @@ def leesUit():
             if row["email"] == inlogEmail and row["wachtwoord"] == inlogWachtwoord:
                 print("Inloggen is een succes!")
             else:
-                print("Inloggen is niet gelukt")
+                print("Inloggen is niet gelukt") #key value error
 
     finally:
         leesKlantUit.close()
