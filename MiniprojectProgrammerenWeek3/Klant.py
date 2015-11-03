@@ -1,7 +1,7 @@
 __author__ = 'jouke-bouwe'
 
 import csv
-import ast
+
 csvKlantBestand = 'C:/Users\jouke-bouwe/Documents/School/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
 
 #variablen voor het registreren en opslag
@@ -15,6 +15,7 @@ wachtwoord2 = ""
 inlogEmail = ""
 inlogWachtwoord = ""
 
+fieldnames = {"email", "wachtwoord", "naam", "achternaam"}
 
 #In deze functie slaan we de gegevens van de klant op in een csv bestand.
 def sign(email, wachtwoord, naam, achternaam):
@@ -28,7 +29,8 @@ def sign(email, wachtwoord, naam, achternaam):
     if wachtwoord == wachtwoord2:
         try:
             klantBestand = open(csvKlantBestand, 'a')
-            writer = csv.DictWriter({"email":email,"wachtwoord":wachtwoord,"naam":naam,"achternaam":achternaam})
+            writer = csv.DictWriter(klantBestand, fieldnames=fieldnames)
+            writer.writerow({"email": email + " ", "wachtwoord": wachtwoord + " ", "naam":naam + " ", "achternaam": achternaam + " "})
             #"," + email + "," + wachtwoord + "," + naam + "," + achernaam + "\n")
 
         finally:
@@ -44,15 +46,12 @@ def leesUit():
         leesKlantUit = open(csvKlantBestand, 'r')
         reader = csv.DictReader(leesKlantUit, delimiter='\n')
 
-        #for row in reader:
-            #if email == inlogEmail and wachtwoord == inlogWachtwoord:
-                #print("Inloggen is een succes!")
-            #else:
-                #print("Inloggen is niet gelukt")
-        tijdelijk = leesKlantUit[email]
-        if inlogEmail == tijdelijk:
-            #tijdelijk = leesKlantUit["wachtwoord"]
-            print ("is gelijk")
+        for row in reader:
+            if row["email"] == inlogEmail and row["wachtwoord"] == inlogWachtwoord:
+                print("Inloggen is een succes!")
+            else:
+                print("Inloggen is niet gelukt") #key value error
+
     finally:
         leesKlantUit.close()
 
