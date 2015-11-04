@@ -6,8 +6,13 @@ from tkinter import *
 root = Tk()
 root["bg"] = "grey"
 root.wm_title("simple gui")
-#root.resizable(width= False, height= False)
-root.geometry("1280x720+0+0")
+root.resizable(width= False, height= True)
+root.geometry("1200x720+0+0")
+canvas = Canvas(width = 300, height = 200, bg = 'Gray')
+canvas.pack(expand = YES, fill = BOTH)
+gif1 = PhotoImage(file = 'achtergrond.gif')
+canvas.create_image(0, 0, image = gif1, anchor = NW)
+
 
 #de werking van de knopen
 def inlogscherm():
@@ -68,8 +73,8 @@ def registreren():
 buton_1 = Button(root, text = " login   ", command = inlogscherm)
 buton_2 = Button(root, text = "register", command = registreren)
 
-buton_1.place(x = 1200, y = 20)
-buton_2.place(x = 1145, y = 20)
+buton_1.place(x = 1145, y = 20)
+buton_2.place(x = 1090, y = 20)
 
 def welkom_tekst():
     w = Canvas(root,width = 400, height = 200)
