@@ -59,4 +59,11 @@ def GetZenders():   #Haal zenders (aanbieders?) op
         zender = link.string
         print (zender)
 
+print("Hieronder alle titels die vandaag draaien:")
 GetTitels()
+print("\n hieronder worden de links van de covers benoemd:")
+GetCovers()
+print("\n Hieronder vermelden we hoelang een film duurt:")
+GetLengtes()
+print("\n De namen van de aanbieders staan hieronder:")
+GetZenders()
