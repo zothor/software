@@ -11,13 +11,38 @@ DatumVandaag = AmerikaanseDatum[3:5] + "-" + AmerikaanseDatum[:2] + "-" + "20" +
 URL = "http://www.filmtotaal.nl/api/filmsoptv.xml?apikey=yis8n3b7soomlixah6ut8e6pe93epn2u&dag=" + str(DatumVandaag) + "&sorteer=0"
 print (URL)
 
+titelFilms = []
+coversFilms = []
+lengteFilms = []
+alleAanbieders = []
+alleJaartallen = []
+
+#Bij deze functie voegen wij alle informatie afkomstig van de XML pagina samen tot een geheel (bedoeling is om ook te gaan tekenen met deze functie)
+def printInformatie_van_een_film():
+    hoeveelFilms = len(titelFilms)
+    films = 0
+    statement = True
+
+
+    while statement:
+        if films < hoeveelFilms:
+            print(str(films+1) + ': ' + str(titelFilms[films]) + " - " + coversFilms[films]+ " - "+ str(lengteFilms[films]) + " - " +
+                  str(alleJaartallen[films]) + " - " + str(alleAanbieders[films]))
+            films += 1
+
+        else:
+            statement = False
+
+
+
 def GetTitels():    #Haalt filmtitel op
     source_code = requests.get(URL)
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text, "html.parser")
     for link in soup.findAll('titel'):
         titel = link.string
-        print (titel)
+        titelFilms.append(titel)
+
 
 def GetCovers():    #Haalt film cover op
     source_code = requests.get(URL)
@@ -25,7 +50,7 @@ def GetCovers():    #Haalt film cover op
     soup = BeautifulSoup(plain_text, "html.parser")
     for link in soup.findAll('cover'):
         cover = link.string
-        print (cover)
+        coversFilms.append(cover)
 
 def GetLengtes():   #Haal filmlengte op
     source_code = requests.get(URL)
@@ -33,7 +58,8 @@ def GetLengtes():   #Haal filmlengte op
     soup = BeautifulSoup(plain_text, "html.parser")
     for link in soup.findAll('duur'):
         duur = link.string
-        print (duur)
+        lengteFilms.append(duur)
+        print(duur)
 
 def GetLinks(): #Haal link op naar de FilmTotaal pagina
     source_code = requests.get(URL)
@@ -41,7 +67,6 @@ def GetLinks(): #Haal link op naar de FilmTotaal pagina
     soup = BeautifulSoup(plain_text, "html.parser")
     for link in soup.findAll('ft_link'):
         ft_link = link.string
-        print (ft_link)
 
 def GetStart(): #Haal film starttijd op
     source_code = requests.get(URL)
@@ -49,21 +74,40 @@ def GetStart(): #Haal film starttijd op
     soup = BeautifulSoup(plain_text, "html.parser")
     for link in soup.findAll('starttijd'):
         starttijd = link.string
-        print (starttijd)
 
-def GetZenders():   #Haal zenders (aanbieders?) op
+def GetEind(): #Haal film starttijd op
+    source_code = requests.get(URL)
+    plain_text = source_code.text
+    soup = BeautifulSoup(plain_text, "html.parser")
+    for link in soup.findAll('eindtijd'):
+        eindtijd = link.string
+
+def GetAanbieders():   #Haal zenders (aanbieders?) op
     source_code = requests.get(URL)
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text, "html.parser")
     for link in soup.findAll('zender'):
         zender = link.string
-        print (zender)
+        alleAanbieders.append(zender)
+
+def getJaartal(): #Haalt het jaartal van de film op van de api.
+    source_code = requests.get(URL)
+    plain_text = source_code.text
+    soup = BeautifulSoup(plain_text, "html.parser")
+    for link in soup.findAll('jaar'):
+        jaartal = link.string
+        alleJaartallen.append(jaartal)
+
 
 print("Hieronder alle titels die vandaag draaien:")
 GetTitels()
-print("\n hieronder worden de links van de covers benoemd:")
-GetCovers()
 print("\n Hieronder vermelden we hoelang een film duurt:")
 GetLengtes()
+print("\n hieronder worden de links van de covers benoemd:")
+GetCovers()
 print("\n De namen van de aanbieders staan hieronder:")
-GetZenders()
+GetAanbieders()
+getJaartal()
+
+
+printInformatie_van_een_film()
