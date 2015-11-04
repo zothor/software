@@ -98,7 +98,7 @@ def getJaartal(): #Haalt het jaartal van de film op van de api en doorloopt alle
         elif jaartalIntMaken >= 2010:
             aanbieder = "Ricardo"
         alleAanbieders.append(aanbieder)
-
+#
 
 #print("Hieronder alle titels die vandaag draaien:")
 GetTitels()
