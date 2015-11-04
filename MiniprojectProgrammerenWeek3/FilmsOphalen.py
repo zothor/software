@@ -34,7 +34,6 @@ def printInformatie_van_een_film():
             statement = False
 
 
-
 def GetTitels():    #Haalt filmtitel op
     source_code = requests.get(URL)
     plain_text = source_code.text
@@ -82,21 +81,25 @@ def GetEind(): #Haal film starttijd op
     for link in soup.findAll('eindtijd'):
         eindtijd = link.string
 
-def GetAanbieders():   #Haal zenders (aanbieders?) op
-    source_code = requests.get(URL)
-    plain_text = source_code.text
-    soup = BeautifulSoup(plain_text, "html.parser")
-    for link in soup.findAll('zender'):
-        zender = link.string
-        alleAanbieders.append(zender)
-
-def getJaartal(): #Haalt het jaartal van de film op van de api.
+def getJaartal(): #Haalt het jaartal van de film op van de api en doorloopt alle jaartallen om te kijken voor welke aanbier hij geld.
     source_code = requests.get(URL)
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text, "html.parser")
     for link in soup.findAll('jaar'):
         jaartal = link.string
         alleJaartallen.append(jaartal)
+        jaartalIntMaken = int(jaartal)
+        if jaartalIntMaken <= 1969:
+            aanbieder = "Kevin"
+        elif jaartalIntMaken >= 1970 and jaartalIntMaken <= 1989:
+            aanbieder = "Frank"
+        elif jaartalIntMaken >= 1990 and jaartalIntMaken <= 1999:
+            aanbieder = "Bram"
+        elif jaartalIntMaken >= 2000 and jaartalIntMaken <= 2009:
+            aanbieder = "Jouke-Bouwe"
+        elif jaartalIntMaken >= 2010:
+            aanbieder = "Ricardo"
+        alleAanbieders.append(aanbieder)
 
 
 print("Hieronder alle titels die vandaag draaien:")
@@ -106,8 +109,8 @@ GetLengtes()
 print("\n hieronder worden de links van de covers benoemd:")
 GetCovers()
 print("\n De namen van de aanbieders staan hieronder:")
-GetAanbieders()
 getJaartal()
 
+print(alleAanbieders)
 
 printInformatie_van_een_film()
