@@ -2,24 +2,12 @@ __author__ = 'Bram'
 
 from tkinter import *
 
-
-
-
 #de dementsies van het scherm
 root = Tk()
-root["bg"] = "#7f8c8d"
-root.wm_title("MovieNet")
-root.resizable(width= False, height= True)
-root.geometry("1200x720+0+0")
-canvas = Canvas(width = 1280, height = 720, bg = 'gray')
-canvas.pack(expand = YES, fill = BOTH)
-gif1 = PhotoImage(file = 'achtergrond.gif')
-canvas.create_image(0,0, image = gif1, anchor = NW)
-#background_image=PhotoImage(file="achtergrond.gif")
-#background_image.pack()
-
-
-
+root["bg"] = "grey"
+root.wm_title("simple gui")
+#root.resizable(width= False, height= False)
+root.geometry("1280x720+0+0")
 
 #de werking van de knopen
 def inlogscherm():
@@ -40,11 +28,11 @@ def registreren():
     top.title("Register")
     top.resizable(width= False, height= False)
     top.geometry("500x250+50+70")
-    top["bg"] = "#1869A0"
+    top["bg"] = "grey"
 
     helptekst = Canvas(top, width = 200, height = 50)
-    helptekst.create_rectangle(200,50,0,0, fill = "#F6F6F6")
-    helptekst.create_text(100, 25, text = "Fill in the blanks", fill = "black", font = ("broadway", 12))
+    helptekst.create_rectangle(200,50,0,0, fill = "red")
+    helptekst.create_text(100, 25, text = "Fill in the blanks", fill = "white", font = ("broadway", 12))
     helptekst.place(relx= 0.3,rely = 0.05)
 
     bottomframe = Frame(top)
@@ -77,11 +65,11 @@ def registreren():
 #de knopen voor het inloggen
 
 
-buton_1 = Button(root, text = " Login   ", command = inlogscherm)
-buton_2 = Button(root, text = "Register", command = registreren)
+buton_1 = Button(root, text = " login   ", command = inlogscherm)
+buton_2 = Button(root, text = "register", command = registreren)
 
-buton_2.place(x = 1090, y = 20)
-buton_1.place(x = 1145, y = 20)
+buton_1.place(x = 1200, y = 20)
+buton_2.place(x = 1145, y = 20)
 
 def welkom_tekst():
     w = Canvas(root,width = 400, height = 200)
@@ -91,13 +79,12 @@ def welkom_tekst():
 
 welkom_tekst()
 
-def aanbod_1():
+def aanbot_1():
     w = Canvas(root,width = 1100, height = 50)
     w.create_rectangle(1100, 50, 0, 0, fill = "red")
     w.create_text(100, 25,text = "Today on Movie-Net", fill = "white", font = ("broadway", 12))
     w.place(x = 10, y = 300)
 
-
-aanbod_1()
+aanbot_1()
 
 root.mainloop()

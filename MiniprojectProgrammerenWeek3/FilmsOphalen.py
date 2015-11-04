@@ -9,7 +9,6 @@ DatumVandaag = AmerikaanseDatum[3:5] + "-" + AmerikaanseDatum[:2] + "-" + "20" +
 #DatumMorgen = str(int(AmerikaanseDatum[3:5])+1) + "-" + AmerikaanseDatum[:2] + "-" + "20" + AmerikaanseDatum[6:]
 
 URL = "http://www.filmtotaal.nl/api/filmsoptv.xml?apikey=yis8n3b7soomlixah6ut8e6pe93epn2u&dag=" + str(DatumVandaag) + "&sorteer=0"
-print (URL)
 
 titelFilms = []
 coversFilms = []
@@ -26,8 +25,8 @@ def printInformatie_van_een_film():
 
     while statement:
         if films < hoeveelFilms:
-            print(str(films+1) + ': ' + str(titelFilms[films]) + " - " + coversFilms[films]+ " - "+ str(lengteFilms[films]) + " - " +
-                  str(alleJaartallen[films]) + " - " + str(alleAanbieders[films]))
+            #print(str(films+1) + ': ' + str(titelFilms[films]) + " - " + coversFilms[films]+ " - "+ str(lengteFilms[films]) + " - " +
+                  #str(alleJaartallen[films]) + " - " + str(alleAanbieders[films]))
             films += 1
 
         else:
@@ -58,7 +57,6 @@ def GetLengtes():   #Haal filmlengte op
     for link in soup.findAll('duur'):
         duur = link.string
         lengteFilms.append(duur)
-        print(duur)
 
 def GetLinks(): #Haal link op naar de FilmTotaal pagina
     source_code = requests.get(URL)
@@ -102,15 +100,15 @@ def getJaartal(): #Haalt het jaartal van de film op van de api en doorloopt alle
         alleAanbieders.append(aanbieder)
 
 
-print("Hieronder alle titels die vandaag draaien:")
+#print("Hieronder alle titels die vandaag draaien:")
 GetTitels()
-print("\n Hieronder vermelden we hoelang een film duurt:")
+#print("\n Hieronder vermelden we hoelang een film duurt:")
 GetLengtes()
-print("\n hieronder worden de links van de covers benoemd:")
+#print("\n hieronder worden de links van de covers benoemd:")
 GetCovers()
-print("\n De namen van de aanbieders staan hieronder:")
+#print("\n De namen van de aanbieders staan hieronder:")
 getJaartal()
 
-print(alleAanbieders)
+#print(alleAanbieders)
 
 printInformatie_van_een_film()
