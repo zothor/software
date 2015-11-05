@@ -18,10 +18,11 @@ canvas.create_image(0, 0, image = gif1, anchor = NW)
 def inlogscherm():
     top = Toplevel()
     top.title("login")
+    top["bg"] = "grey"
     login = Button(top, text = "login", command = na_inloggen)
     login.grid(row = 3, columnspan = 2)
-    label_1 = Label(top, text = "Name")
-    label_2 = Label(top, text = "password")
+    label_1 = Label(top, text = "Name", bg = "grey", fg = "white")
+    label_2 = Label(top, text = "password", bg = "grey", fg = "white")
     entry_1 = Entry(top)
     entry_2 = Entry(top)
 
