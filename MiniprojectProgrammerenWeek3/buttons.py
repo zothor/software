@@ -194,16 +194,19 @@ def today():
     today = Canvas(root,width = 1100, height = 50)
     today.create_rectangle(1100, 50, 0, 0, fill = "red")
     today.create_text(100, 25,text = "Today on Movie-Net", fill = "white", font = ("broadway", 12))
-    today.place(x = 10, y = 300)
+    today.place(x = 10, y = 250)
 
 def filmsOphalen():
+    naarbeneden = 330
     i=0
     while i <len(FilmsOphalen.titelFilms):
         j = i
-        naamButton =  ("Button" + str(j))
-        naamButton = (root, text=FilmsOphalen.titelFilms[i])
+        global naamButton
+        naamButton = ("Button" + str(j))
+        naamButton = Button(root, text=FilmsOphalen.titelFilms[i], bg = "red", fg = "white", font = ("broadway", 12))
         i+=1
-        print(naamButton)
+        naamButton.place(x = 20, y = naarbeneden)
+        naarbeneden += 35
 
 today()
 filmsOphalen()
