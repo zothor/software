@@ -120,6 +120,4 @@ GetRatings()
 #print("\n De namen van de aanbieders staan hieronder:")
 getJaartal()
 
-#print(alleAanbieders)
-
 printInformatie_van_een_film()

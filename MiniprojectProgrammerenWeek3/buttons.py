@@ -2,6 +2,7 @@ __author__ = 'Bram + Frank'
 import csv
 csvKlantBestand = 'C:/Users\Rica\PycharmProjects\software\MiniprojectProgrammerenWeek3\klantBestand.csv'
 from tkinter import *
+from MiniprojectProgrammerenWeek3 import FilmsOphalen
 
 #variabelen voor het opslaan wie is ingelogd
 huidigEmail = ""
@@ -195,6 +196,16 @@ def today():
     today.create_text(100, 25,text = "Today on Movie-Net", fill = "white", font = ("broadway", 12))
     today.place(x = 10, y = 300)
 
+def filmsOphalen():
+    i=0
+    while i <len(FilmsOphalen.titelFilms):
+        j = i
+        naamButton =  ("Button" + str(j))
+        naamButton = (root, text=FilmsOphalen.titelFilms[i])
+        i+=1
+        print(naamButton)
+
 today()
+filmsOphalen()
 
 root.mainloop()
