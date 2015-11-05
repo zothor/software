@@ -74,7 +74,7 @@ def leesUit():
 
 #maakDictionaryHeaders()
 #registreren(email, wachtwoord, naam, achternaam)
-leesUit()
+#leesUit()
 #print (huidigEmail)
 #print (huidigNaam)
 #print (huidigAchternaam)
