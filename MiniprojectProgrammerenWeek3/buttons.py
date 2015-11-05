@@ -60,11 +60,11 @@ def registreren():
     label_4 = Label(bottomframe, text = "Password")
     label_5 = Label(bottomframe, text = "Repeat password")
 
-    entry_1 = Entry(bottomframe,textviariable = Email)
-    entry_2 = Entry(bottomframe,textviariable = Name)
-    entry_3 = Entry(bottomframe,textviariable = Surname)
-    entry_4 = Entry(bottomframe,textviariable = Password)
-    entry_5 = Entry(bottomframe,textviatiable = password2)
+    entry_1 = Entry(bottomframe,textvariable = Email)
+    entry_2 = Entry(bottomframe,textvariable = Name)
+    entry_3 = Entry(bottomframe,textvariable = Surname)
+    entry_4 = Entry(bottomframe,textvariable = Password)
+    entry_5 = Entry(bottomframe,textvariable = password2)
 
 
 
