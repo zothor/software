@@ -22,7 +22,7 @@ Name = StringVar()
 Surname = StringVar()
 Password = StringVar()
 Password2 = StringVar()
-login = StringVar()
+login1 = StringVar()
 login2 = StringVar()
 
 root["bg"] = "grey"
@@ -47,7 +47,7 @@ def inlogscherm():
     login.grid(row = 3, columnspan = 2)
     label_1 = Label(top, text = "Name", bg = "grey", fg = "white")
     label_2 = Label(top, text = "password", bg = "grey", fg = "white")
-    entry_1 = Entry(top, textvariable = login)
+    entry_1 = Entry(top, textvariable = login1)
     entry_2 = Entry(top, textvariable = login2)
 
     label_1.grid(row = 0, sticky = W)
@@ -95,12 +95,13 @@ def registreren():
     entry_3.grid(row = 3, column = 1)
     entry_4.grid(row = 4, column = 1)
     entry_5.grid(row = 5, column = 1)
-    submit = Button(bottomframe, text = "submit", command = opslaan)
+    submit = Button(bottomframe, text = "submit", command = (lambda: opslaan(top)))
     submit.grid(row = 6, columnspan = 2)
 
 
 #slaat de tekst op in csv bestand
-def opslaan():
+def opslaan(top):
+    top.destroy()
     email = Email.get()
     naam = Name.get()
     achternaam = Surname.get()
@@ -122,7 +123,7 @@ def opslaan():
 #controle inloggen
 def leesUit():
 
-    inlogEmail = login.get()
+    inlogEmail = login1.get()
     inlogWachtwoord = login2.get()
 
     print(inlogEmail)
