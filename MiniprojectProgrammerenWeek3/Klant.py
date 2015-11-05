@@ -1,5 +1,5 @@
 __author__ = 'jouke-bouwe'
-
+#
 import csv
 csvKlantBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
 #csvKlantBestand = 'C:/Users/jouke-bouwe/Documents/School/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
