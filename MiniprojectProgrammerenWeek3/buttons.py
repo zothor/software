@@ -12,17 +12,22 @@ Password2 = StringVar()
 
 root["bg"] = "grey"
 root.wm_title("simple gui")
-root.resizable(width= False, height= False)
-root.geometry("1280x720+0+0")
+root.resizable(width= False, height= True)
+root.geometry("1200x720+0+0")
+canvas = Canvas(width = 300, height = 200, bg = 'Gray')
+canvas.pack(expand = YES, fill = BOTH)
+gif1 = PhotoImage(file = 'achtergrond.gif')
+canvas.create_image(0, 0, image = gif1, anchor = NW)
 
 #de werking van de knopen
 def inlogscherm():
     top = Toplevel()
     top.title("login")
-    login = Button(top, text = "login")
+    top["bg"] = "grey"
+    login = Button(top, text = "login", command = na_inloggen)
     login.grid(row = 3, columnspan = 2)
-    label_1 = Label(top, text = "Name")
-    label_2 = Label(top, text = "password")
+    label_1 = Label(top, text = "Name", bg = "grey", fg = "white")
+    label_2 = Label(top, text = "password", bg = "grey", fg = "white")
     entry_1 = Entry(top)
     entry_2 = Entry(top)
 
@@ -46,7 +51,6 @@ def registreren():
 
 
 
-
     bottomframe = Frame(top)
     bottomframe.pack(side = BOTTOM)
 
@@ -61,8 +65,6 @@ def registreren():
     entry_3 = Entry(bottomframe, textvariable = Surname)
     entry_4 = Entry(bottomframe, textvariable = Password)
     entry_5 = Entry(bottomframe, textvariable = Password2)
-
-
 
 
 
@@ -101,11 +103,11 @@ def opslaan():
 #de knopen voor het inloggen
 
 
-buton_1 = Button(root, text = " login   ", command = inlogscherm)
-buton_2 = Button(root, text = "register", command = registreren)
+buton_1 = Button(root, text = " login   ", command = inlogscherm, bg = "red", fg = "white", width = 10 ,height = 1, font = ("broadway", 12))
+buton_2 = Button(root, text = "register", command = registreren, bg = "red", fg = "white", width = 10, height = 1, font = ("broadway", 12))
 
-buton_1.place(x = 1200, y = 20)
-buton_2.place(x = 1145, y = 20)
+buton_1.place(x = 800, y = 30)
+buton_2.place(x = 800, y = 80)
 
 def welkom_tekst():
     w = Canvas(root,width = 400, height = 200)
@@ -122,5 +124,32 @@ def aanbot_1():
     w.place(x = 10, y = 300)
 
 aanbot_1()
+
+def na_inloggen():
+    top = Toplevel()
+    top.title("Movie-Net")
+    top["bg"] = "grey"
+    top.resizable(width= False, height= True)
+    top.geometry("1200x720+0+0")
+
+    achtergrond = Canvas(Toplevel, width = 200, height = 200)
+    achtergrond.pack()
+    img = Tk.P
+    achtergrond.create_image(50,50,image = img)
+
+    helptekst = Canvas(top, width = 200, height = 50)
+    helptekst.create_rectangle(200,50,0,0, fill = "red")
+    helptekst.create_text(100, 25, text = "", fill = "white", font = ("broadway", 12))
+    helptekst.place(relx= 0.41,rely = 0.05)
+
+    w = Canvas(top,width = 400, height = 200)
+    w.create_rectangle(400, 200, 0 , 0, fill = "red")
+    w.create_text(190, 100,text = "Welcome to Movie-Net", fill = "white", font = ("broadway", 20))
+    w.place(x = 10, y = 10)
+
+
+
+
+
 
 root.mainloop()

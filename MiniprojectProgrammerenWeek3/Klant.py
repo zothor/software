@@ -1,8 +1,8 @@
 __author__ = 'jouke-bouwe'
 
 import csv
-
-csvKlantBestand = 'C:/Users\jouke-bouwe/Documents/School/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
+csvKlantBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
+#csvKlantBestand = 'C:/Users/jouke-bouwe/Documents/School/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
 
 #variablen voor het registreren en opslag
 email = ""
@@ -14,6 +14,11 @@ wachtwoord2 = ""
 #variablen voor het inloggen van de user
 inlogEmail = ""
 inlogWachtwoord = ""
+
+#variabelen voor het opslaan wie is ingelogd
+huidigEmail = ""
+huidigNaam = ""
+huidigAchternaam = ""
 
 fieldnames = ["email", "wachtwoord", "naam", "achternaam"]
 
@@ -56,14 +61,20 @@ def leesUit():
 
         for row in reader:
             if row["email"] == inlogEmail and row["wachtwoord"] == inlogWachtwoord:
-                print("Inloggen is een succes!")
+                print ("Ingeloggen is een succes")
+                global huidigEmail, huidigNaam, huidigAchternaam
+                huidigEmail = row["email"]
+                huidigNaam = row["naam"]
+                huidigAchternaam = row["achternaam"]
             else:
                 print("Inloggen is niet gelukt")
 
     finally:
         leesKlantUit.close()
 
-maakDictionaryHeaders()
-registreren(email, wachtwoord, naam, achternaam)
+#maakDictionaryHeaders()
+#registreren(email, wachtwoord, naam, achternaam)
 leesUit()
-
+#print (huidigEmail)
+#print (huidigNaam)
+#print (huidigAchternaam)

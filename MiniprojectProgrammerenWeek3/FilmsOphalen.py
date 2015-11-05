@@ -10,6 +10,7 @@ DatumVandaag = AmerikaanseDatum[3:5] + "-" + AmerikaanseDatum[:2] + "-" + "20" +
 
 URL = "http://www.filmtotaal.nl/api/filmsoptv.xml?apikey=yis8n3b7soomlixah6ut8e6pe93epn2u&dag=" + str(DatumVandaag) + "&sorteer=0"
 
+starttijd = ""
 titelFilms = []
 coversFilms = []
 lengteFilms = []
@@ -69,6 +70,7 @@ def GetStart(): #Haal film starttijd op
     source_code = requests.get(URL)
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text, "html.parser")
+    global starttijd
     for link in soup.findAll('starttijd'):
         starttijd = link.string
 
@@ -78,6 +80,13 @@ def GetEind(): #Haal film starttijd op
     soup = BeautifulSoup(plain_text, "html.parser")
     for link in soup.findAll('eindtijd'):
         eindtijd = link.string
+
+def GetRatings(): #Haal IMDB rating op
+    source_code = requests.get(URL)
+    plain_text = source_code.text
+    soup = BeautifulSoup(plain_text, "html.parser")
+    for link in soup.findAll('imdb_rating'):
+        imdb_rating = link.string
 
 def getJaartal(): #Haalt het jaartal van de film op van de api en doorloopt alle jaartallen om te kijken voor welke aanbier hij geld.
     source_code = requests.get(URL)
@@ -106,6 +115,8 @@ GetTitels()
 GetLengtes()
 #print("\n hieronder worden de links van de covers benoemd:")
 GetCovers()
+#print("\n Hieronder de ratings van de films:")
+GetRatings()
 #print("\n De namen van de aanbieders staan hieronder:")
 getJaartal()
 
