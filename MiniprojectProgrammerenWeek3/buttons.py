@@ -4,7 +4,11 @@ from tkinter import *
 
 #de dementsies van het scherm
 root = Tk()
-
+Email = StringVar()
+Name = StringVar()
+Surname = StringVar()
+Password = StringVar()
+Password2 = StringVar()
 
 root["bg"] = "grey"
 root.wm_title("simple gui")
@@ -41,11 +45,7 @@ def registreren():
     helptekst.place(relx= 0.3,rely = 0.05)
 
 
-    Email = StringVar()
-    Name = StringVar()
-    Surname = StringVar()
-    Password = StringVar()
-    password2 = StringVar()
+
 
     bottomframe = Frame(top)
     bottomframe.pack(side = BOTTOM)
@@ -56,11 +56,13 @@ def registreren():
     label_4 = Label(bottomframe, text = "Password")
     label_5 = Label(bottomframe, text = "Repeat password")
 
-    entry_1 = Entry(bottomframe,textviariable = Email)
-    entry_2 = Entry(bottomframe,textviariable = Name)
-    entry_3 = Entry(bottomframe,textviariable = Surname)
-    entry_4 = Entry(bottomframe,textviariable = Password)
-    entry_5 = Entry(bottomframe,textviatiable = password2)
+    entry_1 = Entry(bottomframe, textvariable = Email) #textviariable maakt layout stuck :(
+    entry_2 = Entry(bottomframe, textvariable = Name)
+    entry_3 = Entry(bottomframe, textvariable = Surname)
+    entry_4 = Entry(bottomframe, textvariable = Password)
+    entry_5 = Entry(bottomframe, textvariable = Password2)
+
+
 
 
 
@@ -76,8 +78,24 @@ def registreren():
     entry_3.grid(row = 3, column = 1)
     entry_4.grid(row = 4, column = 1)
     entry_5.grid(row = 5, column = 1)
-    submit = Button(bottomframe, text = "submit")
+    submit = Button(bottomframe, text = "submit", command = opslaan)
     submit.grid(row = 6, columnspan = 2)
+
+def opslaan():
+    email = Email.get()
+    naam = Name.get()
+    achternaam = Surname.get()
+    wachtwoord = Password.get()
+    wachtwoord2 = Password2.get()
+
+    print(email)
+    print(naam)
+    print(achternaam)
+    print(wachtwoord)
+    print(wachtwoord2)
+
+
+
 
 
 #de knopen voor het inloggen
