@@ -3,6 +3,10 @@ import csv
 csvKlantBestand = 'C:/Users\Bram\PycharmProjects\software\MiniprojectProgrammerenWeek3\klantBestand.csv'
 from tkinter import *
 
+#variabelen voor het opslaan wie is ingelogd
+huidigEmail = ""
+huidigNaam = ""
+huidigAchternaam = ""
 
 #de dementsies van het scherm
 root = Tk()
@@ -45,8 +49,8 @@ def inlogscherm():
 
     login = Button(top, text = "login", command = (lambda: na_inloggen(top)))
     login.grid(row = 3, columnspan = 2)
-    label_1 = Label(top, text = "Name", bg = "grey", fg = "white")
-    label_2 = Label(top, text = "password", bg = "grey", fg = "white")
+    label_1 = Label(top, text = "Email", bg = "grey", fg = "white")
+    label_2 = Label(top, text = "Password", bg = "grey", fg = "white")
     entry_1 = Entry(top, textvariable = login1)
     entry_2 = Entry(top, textvariable = login2)
 
@@ -101,6 +105,7 @@ def registreren():
 
 #slaat de tekst op in csv bestand
 def opslaan(top):
+    global naam
     top.destroy()
     email = Email.get()
     naam = Name.get()
@@ -123,6 +128,7 @@ def opslaan(top):
 #controle inloggen
 def leesUit():
 
+    global inlogEmail
     inlogEmail = login1.get()
     inlogWachtwoord = login2.get()
 
@@ -136,6 +142,13 @@ def leesUit():
         for row in reader:
             if row["email"] == inlogEmail and row["wachtwoord"] == inlogWachtwoord:
                 print("Inloggen is een succes!")
+                print ("Ingeloggen is een succes")
+
+                global huidigEmail, huidigNaam, huidigAchternaam
+                huidigEmail = row["email"]
+                huidigNaam = row["naam"]
+                huidigAchternaam = row["achternaam"]
+                print(huidigNaam)
             else:
                 print("Inloggen is niet gelukt")
 
@@ -168,12 +181,20 @@ today.place(x = 10, y = 300)
 
 
 def na_inloggen(top):
+    #cleard het scherm
     global buton_1
     global buton_2
     global today
+    global w
     buton_1.destroy()
     buton_2.destroy()
     top.destroy()
     today.destroy()
+    w.destroy()
+
+    user = Canvas(root,width = 400, height = 200)
+    user.create_rectangle(400, 200, 0 , 0, fill = "red")
+    user.create_text(190, 100,text = ("Welcome " + huidigNaam ), fill = "white", font = ("broadway", 20))
+    user.place(x = 10, y = 10)
 
 root.mainloop()
