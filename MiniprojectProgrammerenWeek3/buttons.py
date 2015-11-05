@@ -1,6 +1,6 @@
 __author__ = 'Bram + Frank'
 import csv
-csvKlantBestand = 'C:/Users\Bram\PycharmProjects\software\MiniprojectProgrammerenWeek3\klantBestand.csv'
+csvKlantBestand = 'C:/Users\Rica\PycharmProjects\software\MiniprojectProgrammerenWeek3\klantBestand.csv'
 from tkinter import *
 
 #variabelen voor het opslaan wie is ingelogd
@@ -47,7 +47,7 @@ def inlogscherm():
     top.title("login")
     top["bg"] = "grey"
 
-    login = Button(top, text = "login", command = (lambda: na_inloggen(top)))
+    login = Button(top, text = "login", command = (lambda: leesUit(top)))
     login.grid(row = 3, columnspan = 2)
     label_1 = Label(top, text = "Email", bg = "grey", fg = "white")
     label_2 = Label(top, text = "Password", bg = "grey", fg = "white")
@@ -125,8 +125,14 @@ def opslaan(top):
     else:
         print("Wachtwoord komt niet overeen")
 
+def welkomtekst():
+    user = Canvas(root,width = 400, height = 200)
+    user.create_rectangle(400, 200, 0 , 0, fill = "red")
+    user.create_text(190, 100,text = ("Welcome " + huidigNaam ), fill = "white", font = ("broadway", 20))
+    user.place(x = 10, y = 10)
+
 #controle inloggen
-def leesUit():
+def leesUit(top):
 
     global inlogEmail
     inlogEmail = login1.get()
@@ -143,12 +149,22 @@ def leesUit():
             if row["email"] == inlogEmail and row["wachtwoord"] == inlogWachtwoord:
                 print("Inloggen is een succes!")
                 print ("Ingeloggen is een succes")
-
                 global huidigEmail, huidigNaam, huidigAchternaam
                 huidigEmail = row["email"]
                 huidigNaam = row["naam"]
                 huidigAchternaam = row["achternaam"]
-                print(huidigNaam)
+                #cleard het scherm
+                global buton_1
+                global buton_2
+                global today
+                global w
+                buton_1.destroy()
+                buton_2.destroy()
+                top.destroy()
+                w.destroy()
+
+                welkomtekst()
+
             else:
                 print("Inloggen is niet gelukt")
 
@@ -171,30 +187,14 @@ w = Canvas(root,width = 400, height = 200)
 w.create_rectangle(400, 200, 0 , 0, fill = "red")
 w.create_text(190, 100,text = "Welcome to Movie-Net", fill = "white", font = ("broadway", 20))
 w.place(x = 10, y = 10)
-#de balk met het aan bod vandaag
-today = Canvas(root,width = 1100, height = 50)
-today.create_rectangle(1100, 50, 0, 0, fill = "red")
-today.create_text(100, 25,text = "Today on Movie-Net", fill = "white", font = ("broadway", 12))
-today.place(x = 10, y = 300)
 
+def today():
+    #de balk met het aan bod vandaag
+    today = Canvas(root,width = 1100, height = 50)
+    today.create_rectangle(1100, 50, 0, 0, fill = "red")
+    today.create_text(100, 25,text = "Today on Movie-Net", fill = "white", font = ("broadway", 12))
+    today.place(x = 10, y = 300)
 
-
-
-def na_inloggen(top):
-    #cleard het scherm
-    global buton_1
-    global buton_2
-    global today
-    global w
-    buton_1.destroy()
-    buton_2.destroy()
-    top.destroy()
-    today.destroy()
-    w.destroy()
-
-    user = Canvas(root,width = 400, height = 200)
-    user.create_rectangle(400, 200, 0 , 0, fill = "red")
-    user.create_text(190, 100,text = ("Welcome " + huidigNaam ), fill = "white", font = ("broadway", 20))
-    user.place(x = 10, y = 10)
+today()
 
 root.mainloop()

@@ -3,7 +3,7 @@ __author__ = 'Rica'
 import csv
 import random
 from MiniprojectProgrammerenWeek3 import Klant
-from  MiniprojectProgrammerenWeek3 import FilmsOphalen
+from MiniprojectProgrammerenWeek3 import FilmsOphalen
 
 csvFrankBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/frankBestand.csv'
 csvKevinBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/kevinBestand.csv'
