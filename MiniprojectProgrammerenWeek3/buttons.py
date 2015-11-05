@@ -1,8 +1,12 @@
 __author__ = 'Bram + Frank'
 import csv
-csvKlantBestand = 'C:/Users\Frank\PycharmProjects\software\MiniprojectProgrammerenWeek3\klantBestand.csv'
+csvKlantBestand = 'C:/Users\Bram\PycharmProjects\software\MiniprojectProgrammerenWeek3\klantBestand.csv'
 from tkinter import *
 
+#variabelen voor het opslaan wie is ingelogd
+huidigEmail = ""
+huidigNaam = ""
+huidigAchternaam = ""
 
 #de dementsies van het scherm
 root = Tk()
@@ -22,29 +26,32 @@ Name = StringVar()
 Surname = StringVar()
 Password = StringVar()
 Password2 = StringVar()
-login = StringVar()
+login1 = StringVar()
 login2 = StringVar()
 
 root["bg"] = "grey"
 root.wm_title("simple gui")
 root.resizable(width= False, height= True)
 root.geometry("1200x720+0+0")
-canvas = Canvas(width = 300, height = 200, bg = 'Gray')
-canvas.pack(expand = YES, fill = BOTH)
+
+#de achtergrond
+
+canvas = Canvas( width = 300, height = 200, bg = 'Gray')
+canvas.pack( expand = YES, fill = BOTH)
 gif1 = PhotoImage(file = 'achtergrond.gif')
 canvas.create_image(0, 0, image = gif1, anchor = NW)
 
-
-#knop voor het inloggen en inglogscherm
+#de werking van de knopen
 def inlogscherm():
     top = Toplevel()
     top.title("login")
     top["bg"] = "grey"
-    login = Button(top, text = "login", command = leesUit)
+
+    login = Button(top, text = "login", command = (lambda: na_inloggen(top)))
     login.grid(row = 3, columnspan = 2)
-    label_1 = Label(top, text = "Name", bg = "grey", fg = "white")
-    label_2 = Label(top, text = "password", bg = "grey", fg = "white")
-    entry_1 = Entry(top, textvariable = login)
+    label_1 = Label(top, text = "Email", bg = "grey", fg = "white")
+    label_2 = Label(top, text = "Password", bg = "grey", fg = "white")
+    entry_1 = Entry(top, textvariable = login1)
     entry_2 = Entry(top, textvariable = login2)
 
     label_1.grid(row = 0, sticky = W)
@@ -59,6 +66,7 @@ def registreren():
     top.geometry("500x250+50+70")
     top["bg"] = "grey"
 
+
     helptekst = Canvas(top, width = 200, height = 50)
     helptekst.create_rectangle(200,50,0,0, fill = "red")
     helptekst.create_text(100, 25, text = "Fill in the blanks", fill = "white", font = ("broadway", 12))
@@ -66,12 +74,13 @@ def registreren():
 
     bottomframe = Frame(top)
     bottomframe.pack(side = BOTTOM)
+    bottomframe["bg"] = "grey"
 
-    label_1 = Label(bottomframe, text = "Email")
-    label_2 = Label(bottomframe, text = "Name")
-    label_3 = Label(bottomframe, text = "Surname")
-    label_4 = Label(bottomframe, text = "Password")
-    label_5 = Label(bottomframe, text = "Repeat password")
+    label_1 = Label(bottomframe, text = "Email", bg = "grey", fg = "white")
+    label_2 = Label(bottomframe, text = "Name", bg = "grey", fg = "white")
+    label_3 = Label(bottomframe, text = "Surname", bg = "grey", fg = "white")
+    label_4 = Label(bottomframe, text = "Password", bg = "grey", fg = "white")
+    label_5 = Label(bottomframe, text = "Repeat password", bg = "grey", fg = "white")
 
     entry_1 = Entry(bottomframe, textvariable = Email)
     entry_2 = Entry(bottomframe, textvariable = Name)
@@ -90,12 +99,14 @@ def registreren():
     entry_3.grid(row = 3, column = 1)
     entry_4.grid(row = 4, column = 1)
     entry_5.grid(row = 5, column = 1)
-    submit = Button(bottomframe, text = "submit", command = opslaan)
+    submit = Button(bottomframe, text = "submit", command = (lambda: opslaan(top)))
     submit.grid(row = 6, columnspan = 2)
 
 
 #slaat de tekst op in csv bestand
-def opslaan():
+def opslaan(top):
+    global naam
+    top.destroy()
     email = Email.get()
     naam = Name.get()
     achternaam = Surname.get()
@@ -117,7 +128,8 @@ def opslaan():
 #controle inloggen
 def leesUit():
 
-    inlogEmail = login.get()
+    global inlogEmail
+    inlogEmail = login1.get()
     inlogWachtwoord = login2.get()
 
     print(inlogEmail)
@@ -130,6 +142,13 @@ def leesUit():
         for row in reader:
             if row["email"] == inlogEmail and row["wachtwoord"] == inlogWachtwoord:
                 print("Inloggen is een succes!")
+                print ("Ingeloggen is een succes")
+
+                global huidigEmail, huidigNaam, huidigAchternaam
+                huidigEmail = row["email"]
+                huidigNaam = row["naam"]
+                huidigAchternaam = row["achternaam"]
+                print(huidigNaam)
             else:
                 print("Inloggen is niet gelukt")
 
@@ -146,50 +165,36 @@ buton_2 = Button(root, text = "register", command = registreren, bg = "red", fg 
 
 buton_1.place(x = 800, y = 30)
 buton_2.place(x = 800, y = 80)
-#tekt met welkom erin
-def welkom_tekst():
-    w = Canvas(root,width = 400, height = 200)
-    w.create_rectangle(400, 200, 0 , 0, fill = "red")
-    w.create_text(190, 100,text = "Welcome to Movie-Net", fill = "white", font = ("broadway", 20))
-    w.place(x = 10, y = 10)
 
-welkom_tekst()
-#rode balk in hoofdscherm
-def rodebalk():
-    w = Canvas(root,width = 1100, height = 50)
-    w.create_rectangle(1100, 50, 0, 0, fill = "red")
-    w.create_text(100, 25,text = "Today on Movie-Net", fill = "white", font = ("broadway", 12))
-    w.place(x = 10, y = 300)
-rodebalk()
-
-def na_inloggen():
-    top = Toplevel()
-    top.title("Movie-Net")
-    top["bg"] = "grey"
-    top.resizable(width= False, height= True)
-    top.geometry("1200x720+0+0")
-
-    achtergrond = Canvas(Toplevel, width = 200, height = 200)
-    achtergrond.pack()
-    img = Tk.P
-    achtergrond.create_image(50,50,image = img)
-
-    helptekst = Canvas(top, width = 200, height = 50)
-    helptekst.create_rectangle(200,50,0,0, fill = "red")
-    helptekst.create_text(100, 25, text = "", fill = "white", font = ("broadway", 12))
-    helptekst.place(relx= 0.41,rely = 0.05)
-
-    w = Canvas(top,width = 400, height = 200)
-    w.create_rectangle(400, 200, 0 , 0, fill = "red")
-    w.create_text(190, 100,text = "Welcome to Movie-Net", fill = "white", font = ("broadway", 20))
-    w.place(x = 10, y = 10)
-
-    loginemail = login.get()
-    loginww = login2.get()
+#welkomst tekst
+w = Canvas(root,width = 400, height = 200)
+w.create_rectangle(400, 200, 0 , 0, fill = "red")
+w.create_text(190, 100,text = "Welcome to Movie-Net", fill = "white", font = ("broadway", 20))
+w.place(x = 10, y = 10)
+#de balk met het aan bod vandaag
+today = Canvas(root,width = 1100, height = 50)
+today.create_rectangle(1100, 50, 0, 0, fill = "red")
+today.create_text(100, 25,text = "Today on Movie-Net", fill = "white", font = ("broadway", 12))
+today.place(x = 10, y = 300)
 
 
 
 
+def na_inloggen(top):
+    #cleard het scherm
+    global buton_1
+    global buton_2
+    global today
+    global w
+    buton_1.destroy()
+    buton_2.destroy()
+    top.destroy()
+    today.destroy()
+    w.destroy()
 
+    user = Canvas(root,width = 400, height = 200)
+    user.create_rectangle(400, 200, 0 , 0, fill = "red")
+    user.create_text(190, 100,text = ("Welcome " + huidigNaam ), fill = "white", font = ("broadway", 20))
+    user.place(x = 10, y = 10)
 
 root.mainloop()
