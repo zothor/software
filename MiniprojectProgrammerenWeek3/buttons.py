@@ -80,7 +80,7 @@ def registreren():
     entry_3.grid(row = 3, column = 1)
     entry_4.grid(row = 4, column = 1)
     entry_5.grid(row = 5, column = 1)
-    submit = Button(bottomframe, text = "submit", command = opslaan)#hoi
+    submit = Button(bottomframe, text = "submit", command = opslaan)#hoi11111
     submit.grid(row = 6, columnspan = 2)
 
 def opslaan():
