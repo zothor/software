@@ -1,6 +1,6 @@
 __author__ = 'Bram + Frank'
 import csv
-csvKlantBestand = 'C:/Users/jouke-bouwe/Documents/School/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
+csvKlantBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
 from tkinter import *
 from MiniprojectProgrammerenWeek3 import FilmsOphalen
 
@@ -13,6 +13,8 @@ alleFilmButtons = []
 huidigEmail = ""
 huidigNaam = ""
 huidigAchternaam = ""
+
+
 
 #de dementsies van het scherm
 root = Tk()
@@ -132,9 +134,9 @@ def opslaan(top):
         print("Wachtwoord komt niet overeen")
 
 def welkomtekst():
-    user = Canvas(root,width = 400, height = 200)
+    user = Canvas(root,width = 400, height = 100)
     user.create_rectangle(400, 200, 0 , 0, fill = "red")
-    user.create_text(190, 100,text = ("Welcome " + huidigNaam ), fill = "white", font = ("broadway", 20))
+    user.create_text(190, 50,text = ("Welcome " + huidigNaam ), fill = "white", font = ("broadway", 20))
     user.place(x = 10, y = 10)
 
 #controle inloggen
@@ -189,9 +191,9 @@ buton_1.place(x = 800, y = 30)
 buton_2.place(x = 800, y = 80)
 
 #welkomst tekst
-w = Canvas(root,width = 400, height = 200)
+w = Canvas(root,width = 400, height = 100)
 w.create_rectangle(400, 200, 0 , 0, fill = "red")
-w.create_text(190, 100,text = "Welcome to Movie-Net", fill = "white", font = ("broadway", 20))
+w.create_text(190, 50,text = "Welcome to Movie-Net", fill = "white", font = ("broadway", 20))
 w.place(x = 10, y = 10)
 
 def today():
@@ -199,27 +201,68 @@ def today():
     today = Canvas(root,width = 1100, height = 50)
     today.create_rectangle(1100, 50, 0, 0, fill = "red")
     today.create_text(100, 25,text = "Today on Movie-Net", fill = "white", font = ("broadway", 12))
-    today.place(x = 10, y = 250)
+    today.place(x = 10, y = 150)
+
+
+
 
 def filmsOphalen():
     global opgehaaldefilm, naarbeneden,alleFilmButtons
 
     #attributen voor het ophalen van de films
-    nummersToevoegen =0
+    #nummersToevoegen =0
 
-    while opgehaaldefilm <len(FilmsOphalen.titelFilms):
-        j = opgehaaldefilm
-        alleFilmButtonsNummers = alleFilmButtons.append(nummersToevoegen)
-        naamButton = "Button" + str(j)
-        naamButton = Button(root, text=FilmsOphalen.titelFilms[opgehaaldefilm], bg = "red", fg = "white", font = ("broadway", 12))
+    #while opgehaaldefilm <len(FilmsOphalen.titelFilms):
+        #j = opgehaaldefilm
+        #alleFilmButtonsNummers = alleFilmButtons.append(nummersToevoegen)
+        #naamButton = "Button" + str(j)
+        #naamButton = Button(root, text=FilmsOphalen.titelFilms[opgehaaldefilm], bg = "red", fg = "white", font = ("broadway", 12))
 
-        labelLengteFilm = Label(root, text= ("Duur: " + str(FilmsOphalen.lengteFilms[opgehaaldefilm])))
-        labelLengteFilm.place(x=500, y=naarbeneden)
-        naamButton.place(x = 20, y = naarbeneden)
+        #labelLengteFilm = Label(root, text= ("Duur: " + str(FilmsOphalen.lengteFilms[opgehaaldefilm])))
+        #labelLengteFilm.place(x=500, y=naarbeneden)
 
-        opgehaaldefilm+=1
-        naarbeneden += 35
-        nummersToevoegen +=1
+        #naamButton.place(x = 20, y = naarbeneden)
+        #opgehaaldefilm+=1
+        #naarbeneden += 35
+        #nummersToevoegen +=1
+
+    Button1 = Button(root, text=FilmsOphalen.titelFilms[0], bg = "red", fg = "white", font = ("broadway", 12))
+    Button1.place(x = 20, y = 230)
+    Button2 = Button(root, text=FilmsOphalen.titelFilms[1], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(1))
+    Button2.place(x = 20, y = 265)
+    Button3 = Button(root, text=FilmsOphalen.titelFilms[2], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(2))
+    Button3.place(x = 20, y = 300)
+    Button4 = Button(root, text=FilmsOphalen.titelFilms[3], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(3))
+    Button4.place(x = 20, y = 335)
+    Button5 = Button(root, text=FilmsOphalen.titelFilms[4], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(4))
+    Button5.place(x = 20, y = 370)
+    Button6 = Button(root, text=FilmsOphalen.titelFilms[5], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(5))
+    Button6.place(x = 20, y = 405)
+    Button7 = Button(root, text=FilmsOphalen.titelFilms[6], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(6))
+    Button7.place(x = 20, y = 440)
+    Button8 = Button(root, text=FilmsOphalen.titelFilms[7], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(7))
+    Button8.place(x = 20, y = 475)
+    # Button9 = Button(root, text=FilmsOphalen.titelFilms[8], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(8))
+    # Button9.place(x = 20, y = 510)
+    # Button10 = Button(root, text=FilmsOphalen.titelFilms[9], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(9))
+    # Button10.place(x = 20, y = 545)
+    # Button11 = Button(root, text=FilmsOphalen.titelFilms[10], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(10))
+    # Button11.place(x = 20, y = 580)
+    # Button12 = Button(root, text=FilmsOphalen.titelFilms[11], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(11))
+    # Button12.place(x = 20, y = 615)
+    # Button13 = Button(root, text=FilmsOphalen.titelFilms[12], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(12))
+    # Button13.place(x = 20, y = 650)
+    # Button14 = Button(root, text=FilmsOphalen.titelFilms[13], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(13))
+    # Button14.place(x = 20, y = 685)
+
+    #labelfilm1 = Label(root,text=FilmsOphalen.alleBeschrijvingen[0],wraplength=700, anchor=W, justify=LEFT, bg="black", fg="white")
+    #labelfilm1.place(x=400, y=250)
+
+def laatBeschrijvingZien(filmnummer):
+    print("Waarom werkt het al")
+    labelfilm = Label(root,text=FilmsOphalen.alleBeschrijvingen[filmnummer],wraplength=700, anchor=W, justify=LEFT, bg="black", fg="white")
+    labelfilm.place(x=400, y=250)
+
 '''
 def informatieFilmPrinten():
         print(opgehaaldefilm)
@@ -230,9 +273,6 @@ def informatieFilmPrinten():
 
 
 '''
-
-
-
 
 today()
 filmsOphalen()
