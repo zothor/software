@@ -39,9 +39,8 @@ def GetTitels():    #Haalt filmtitel op
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text, "html.parser")
     for link in soup.findAll('titel'):
-        titel = link.string
-        titelFilms.append(titel)
-
+            titel = link.string
+            titelFilms.append(titel)
 
 def GetCovers():    #Haalt film cover op
     source_code = requests.get(URL)

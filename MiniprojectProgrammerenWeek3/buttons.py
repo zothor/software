@@ -4,6 +4,8 @@ csvKlantBestand = 'C:/Users/jouke-bouwe/Documents/School/software/MiniprojectPro
 from tkinter import *
 from MiniprojectProgrammerenWeek3 import FilmsOphalen
 
+
+
 #variabelen voor het opslaan wie is ingelogd
 huidigEmail = ""
 huidigNaam = ""
@@ -197,26 +199,34 @@ def today():
     today.place(x = 10, y = 250)
 
 def filmsOphalen():
-    global opgehaaldefilm, naarbeneden
+    global opgehaaldefilm, naarbeneden,naamButton
+
+    #attributen voor het ophalen van de films
     naarbeneden = 330
     opgehaaldefilm=0
+
     while opgehaaldefilm <len(FilmsOphalen.titelFilms):
         j = opgehaaldefilm
-        global naamButton
         naamButton = ("Button" + str(j))
-        naamButton = Button(root, text=FilmsOphalen.titelFilms[opgehaaldefilm], command=informatieFilmPrinten, bg = "red", fg = "white", font = ("broadway", 12))
+        naamButton = Button(root, text=FilmsOphalen.titelFilms[opgehaaldefilm], bg = "red", fg = "white", font = ("broadway", 12))
         opgehaaldefilm+=1
-        naamButton.place(x = 20, y = naarbeneden)
+        labelTitelFilm = Label(root, FilmsOphalen.titelFilms[(opgehaaldefilm)])
+        labelCoverFilm = Label(root, FilmsOphalen.coversFilms[(opgehaaldefilm)])
+        labelLengteFilm = Label(root, FilmsOphalen.lengteFilms[(opgehaaldefilm)])
+        labelTitelFilm.place(x=150, y=naarbeneden)
+        labelLengteFilm.place(x=150, y=naarbeneden)
+        labelCoverFilm.place(x=150, y=naarbeneden)
+        naamButton.place(x=20, y=naarbeneden)
         naarbeneden += 35
 
 def informatieFilmPrinten():
-        labelTitelFilm = Label(root,filmsOphalen().titelFilms[(opgehaaldefilm+1)])
-        labelCoverFilm = Label(root,filmsOphalen().coversFilms[(opgehaaldefilm+1)])
-        labelLengteFilm = Label(root,filmsOphalen().lengteFilms[(opgehaaldefilm+1)])
-        labelTitelFilm.place(x=150, y= naarbeneden)
-        labelLengteFilm.place(x=150,y= naarbeneden)
-        labelCoverFilm.place(x=150, y= naarbeneden)
-        return labelLengteFilm
+        print(opgehaaldefilm)
+        print(FilmsOphalen.titelFilms[(opgehaaldefilm-1)])
+        print(FilmsOphalen.coversFilms[opgehaaldefilm])
+        print(FilmsOphalen.lengteFilms[opgehaaldefilm])
+
+
+
 
 
 today()
