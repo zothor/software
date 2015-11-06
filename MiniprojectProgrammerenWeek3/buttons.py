@@ -1,8 +1,14 @@
 __author__ = 'Bram + Frank'
 import csv
-csvKlantBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
 from tkinter import *
-from MiniprojectProgrammerenWeek3 import FilmsOphalen
+from MiniprojectProgrammerenWeek3 import FilmsOphalen, Aankoop
+
+csvKlantBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
+csvFrankBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/frankBestand.csv'
+csvKevinBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/kevinBestand.csv'
+csvBramBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/bramBestand.csv'
+csvJoukeBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/joukeBestand.csv'
+csvRicardoBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/ricardoBestand.csv'
 
 #variablen om films op te halen
 naarbeneden = 330
@@ -13,8 +19,11 @@ alleFilmButtons = []
 huidigEmail = ""
 huidigNaam = ""
 huidigAchternaam = ""
+ingelogdOfNiet = False
 
-
+labelnaam = ""
+labelfilm = ""
+labelduur = ""
 
 #de dementsies van het scherm
 root = Tk()
@@ -38,7 +47,7 @@ login1 = StringVar()
 login2 = StringVar()
 
 root["bg"] = "grey"
-root.wm_title("simple gui")
+root.wm_title("Movie-Net")
 root.resizable(width= False, height= True)
 root.geometry("1200x720+0+0")
 
@@ -170,7 +179,8 @@ def leesUit(top):
                 buton_2.destroy()
                 top.destroy()
                 w.destroy()
-
+                global ingelogdOfNiet
+                ingelogdOfNiet = True
                 welkomtekst()
 
             else:
@@ -226,54 +236,129 @@ def filmsOphalen():
         #naarbeneden += 35
         #nummersToevoegen +=1
 
-    Button1 = Button(root, text=FilmsOphalen.titelFilms[0], bg = "red", fg = "white", font = ("broadway", 12))
-    Button1.place(x = 20, y = 230)
-    Button2 = Button(root, text=FilmsOphalen.titelFilms[1], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(1))
-    Button2.place(x = 20, y = 265)
-    Button3 = Button(root, text=FilmsOphalen.titelFilms[2], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(2))
-    Button3.place(x = 20, y = 300)
-    Button4 = Button(root, text=FilmsOphalen.titelFilms[3], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(3))
-    Button4.place(x = 20, y = 335)
-    Button5 = Button(root, text=FilmsOphalen.titelFilms[4], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(4))
-    Button5.place(x = 20, y = 370)
-    Button6 = Button(root, text=FilmsOphalen.titelFilms[5], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(5))
-    Button6.place(x = 20, y = 405)
-    Button7 = Button(root, text=FilmsOphalen.titelFilms[6], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(6))
-    Button7.place(x = 20, y = 440)
-    Button8 = Button(root, text=FilmsOphalen.titelFilms[7], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(7))
-    Button8.place(x = 20, y = 475)
-    # Button9 = Button(root, text=FilmsOphalen.titelFilms[8], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(8))
-    # Button9.place(x = 20, y = 510)
-    # Button10 = Button(root, text=FilmsOphalen.titelFilms[9], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(9))
-    # Button10.place(x = 20, y = 545)
-    # Button11 = Button(root, text=FilmsOphalen.titelFilms[10], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(10))
-    # Button11.place(x = 20, y = 580)
-    # Button12 = Button(root, text=FilmsOphalen.titelFilms[11], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(11))
-    # Button12.place(x = 20, y = 615)
-    # Button13 = Button(root, text=FilmsOphalen.titelFilms[12], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(12))
-    # Button13.place(x = 20, y = 650)
-    # Button14 = Button(root, text=FilmsOphalen.titelFilms[13], bg = "red", fg = "white", font = ("broadway", 12), command=laatBeschrijvingZien(13))
-    # Button14.place(x = 20, y = 685)
+    try :
+        Button1 = Button(root, text=FilmsOphalen.titelFilms[0], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(0)))
+        Button1.place(x = 20, y = 230, width=350)
+        Button2 = Button(root, text=FilmsOphalen.titelFilms[1], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(1)))
+        Button2.place(x = 20, y = 265, width=350)
+        Button3 = Button(root, text=FilmsOphalen.titelFilms[2], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(2)))
+        Button3.place(x = 20, y = 300, width=350)
+        Button4 = Button(root, text=FilmsOphalen.titelFilms[3], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(3)))
+        Button4.place(x = 20, y = 335, width=350)
+        Button5 = Button(root, text=FilmsOphalen.titelFilms[4], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(4)))
+        Button5.place(x = 20, y = 370, width=350)
+        Button6 = Button(root, text=FilmsOphalen.titelFilms[5], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(5)))
+        Button6.place(x = 20, y = 405, width=350)
+        Button7 = Button(root, text=FilmsOphalen.titelFilms[6], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(6)))
+        Button7.place(x = 20, y = 440, width=350)
+        Button8 = Button(root, text=FilmsOphalen.titelFilms[7], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(7)))
+        Button8.place(x = 20, y = 475, width=350)
+        Button9 = Button(root, text=FilmsOphalen.titelFilms[8], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(8)))
+        Button9.place(x = 20, y = 510, width=350)
+        Button10 = Button(root, text=FilmsOphalen.titelFilms[9], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(9)))
+        Button10.place(x = 20, y = 545, width=350)
+        Button11 = Button(root, text=FilmsOphalen.titelFilms[10], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(10)))
+        Button11.place(x = 20, y = 580, width=350)
+        Button12 = Button(root, text=FilmsOphalen.titelFilms[11], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(11)))
+        Button12.place(x = 20, y = 615, width=350)
+        Button13 = Button(root, text=FilmsOphalen.titelFilms[12], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(12)))
+        Button13.place(x = 20, y = 650, width=350)
+        Button14 = Button(root, text=FilmsOphalen.titelFilms[13], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(13)))
+        Button14.place(x = 20, y = 685, width=350)
+    except :
+        pass
 
     #labelfilm1 = Label(root,text=FilmsOphalen.alleBeschrijvingen[0],wraplength=700, anchor=W, justify=LEFT, bg="black", fg="white")
     #labelfilm1.place(x=400, y=250)
 
 def laatBeschrijvingZien(filmnummer):
-    print("Waarom werkt het al")
-    labelfilm = Label(root,text=FilmsOphalen.alleBeschrijvingen[filmnummer],wraplength=700, anchor=W, justify=LEFT, bg="black", fg="white")
-    labelfilm.place(x=400, y=250)
+    global labelnaam
+    global labelfilm
+    global labelduur
+    if labelnaam == "":
+        pass
+    else:
+        labelnaam.destroy()
+    if labelfilm == "":
+        pass
+    else:
+        labelfilm.destroy()
+    if labelduur == "":
+        pass
+    else:
+        labelduur.destroy()
+    labelnaam = Label(root,text=(FilmsOphalen.titelFilms[filmnummer] + " : "), font = ("broadway", 18))
+    labelnaam.place(x=400,y=230)
+    labelduur = Label(root,text=("Filmduur : " + FilmsOphalen.lengteFilms[filmnummer] + " minuten."),wraplength=700, anchor=W, justify=LEFT, bg="black", fg="white")
+    labelduur.place(x=400, y=270, width=700)
+    labelfilm = Label(root,text=("Omschrijving : \n" + FilmsOphalen.alleBeschrijvingen[filmnummer]),wraplength=700, anchor=W, justify=LEFT, bg="black", fg="white")
+    labelfilm.place(x=400, y=290, width=700)
+    if ingelogdOfNiet == True:
+        koopbutton = Button(root, text="Kopen", bg = "red", fg = "white", font = ("broadway", 12), command =(lambda:filmKopen(filmnummer)))
+        koopbutton.place(x=1000, y=600)
 
-'''
-def informatieFilmPrinten():
-        print(opgehaaldefilm)
-        print(FilmsOphalen.titelFilms[alleFilmButtons[]])
-        print(FilmsOphalen.coversFilms)
-        print(FilmsOphalen.lengteFilms)
-        print(alleFilmButtons)
+def filmKopen(filmnummer):
+    if FilmsOphalen.alleAanbieders[filmnummer] == "Frank":
+        voegFrankKlantToe(filmnummer)
+    elif FilmsOphalen.alleAanbieders[filmnummer] == "Bram":
+        voegBramKlantToe(filmnummer)
+    elif FilmsOphalen.alleAanbieders[filmnummer] == "Jouke":
+        voegJoukeKlantToe(filmnummer)
+    elif FilmsOphalen.alleAanbieders[filmnummer] == "Kevin":
+        voegKevinKlantToe(filmnummer)
+    elif FilmsOphalen.alleAanbieders[filmnummer] == "Ricardo":
+        voegRicardoKlantToe(filmnummer)
 
+#Hieronder de functies die de klant informatie toevoegt aan de aanbieder's lijst
+def voegFrankKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt geselecteerd
+    Aankoop.genereerCode()
+    try:
+        global frankBestand
+        frankBestand = open(Aankoop.csvFrankBestand, 'a', newline='')
+        writer = csv.DictWriter(frankBestand,delimiter=',', fieldnames=Aankoop.fieldnames2)
+        writer.writerow({"naam": huidigNaam, "achternaam": huidigAchternaam, "film":FilmsOphalen.titelFilms[filmnummer], "code":Aankoop.uniekeCode})
+    finally:
+        frankBestand.close()
 
-'''
+def voegBramKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt geselecteerd
+    Aankoop.genereerCode()
+    try:
+        global bramBestand
+        bramBestand = open(Aankoop.csvBramBestand, 'a', newline='')
+        writer = csv.DictWriter(bramBestand,delimiter=',', fieldnames=Aankoop.fieldnames2)
+        writer.writerow({"naam": huidigNaam, "achternaam": huidigAchternaam, "film":FilmsOphalen.titelFilms[filmnummer], "code":Aankoop.uniekeCode})
+    finally:
+        bramBestand.close()
 
+def voegJoukeKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt geselecteerd
+    Aankoop.genereerCode()
+    try:
+        global joukeBestand
+        joukeBestand = open(csvJoukeBestand, 'a', newline='')
+        writer = csv.DictWriter(joukeBestand,delimiter=',', fieldnames=Aankoop.fieldnames2)
+        writer.writerow({"naam": huidigNaam, "achternaam": huidigAchternaam, "film":FilmsOphalen.titelFilms[filmnummer], "code":Aankoop.uniekeCode})
+    finally:
+        joukeBestand.close()
+
+def voegKevinKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt geselecteerd
+    Aankoop.genereerCode()
+    try:
+        global kevinBestand
+        kevinBestand = open(csvKevinBestand, 'a', newline='')
+        writer = csv.DictWriter(kevinBestand,delimiter=',', fieldnames=Aankoop.fieldnames2)
+        writer.writerow({"naam": huidigNaam, "achternaam": huidigAchternaam, "film":FilmsOphalen.titelFilms[filmnummer], "code":Aankoop.uniekeCode})
+    finally:
+        kevinBestand.close()
+
+def voegRicardoKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt geselecteerd
+    Aankoop.genereerCode()
+    try:
+        global ricardoBestand
+        ricardoBestand = open(csvRicardoBestand, 'a', newline='')
+        writer = csv.DictWriter(ricardoBestand,delimiter=',', fieldnames=Aankoop.fieldnames2)
+        writer.writerow({"naam": huidigNaam, "achternaam": huidigAchternaam, "film":FilmsOphalen.titelFilms[filmnummer], "code":Aankoop.uniekeCode})
+    finally:
+        ricardoBestand.close()
 today()
 filmsOphalen()
 root.mainloop()

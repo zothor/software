@@ -2,7 +2,7 @@ __author__ = 'Rica'
 
 import csv
 import random
-from MiniprojectProgrammerenWeek3 import Klant
+import os.path
 from MiniprojectProgrammerenWeek3 import FilmsOphalen
 
 csvFrankBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/frankBestand.csv'
@@ -11,7 +11,7 @@ csvBramBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammeren
 csvJoukeBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/joukeBestand.csv'
 csvRicardoBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/ricardoBestand.csv'
 
-fieldnames = ["naam", "achternaam", "film"]
+fieldnames2 = ["naam", "achternaam", "film", "code"]
 
 uniekeCode = ""
 alleLijsten_van_de_films = []
@@ -19,35 +19,27 @@ alleLijsten_van_de_films = []
 def maakFrankHeaders():
     frankBestand = open(csvFrankBestand, 'a', newline='')
     writer = csv.writer(frankBestand,dialect='excel')
-    writer.writerow(fieldnames)
+    writer.writerow(fieldnames2)
 
 def maakKevinHeaders():
     kevinBestand = open(csvKevinBestand, 'a', newline='')
     writer = csv.writer(kevinBestand,dialect='excel')
-    writer.writerow(fieldnames)
+    writer.writerow(fieldnames2)
 
 def maakBramHeaders():
     bramBestand = open(csvBramBestand, 'a', newline='')
     writer = csv.writer(bramBestand,dialect='excel')
-    writer.writerow(fieldnames)
+    writer.writerow(fieldnames2)
 
 def maakJoukeHeaders():
     joukeBestand = open(csvJoukeBestand, 'a', newline='')
     writer = csv.writer(joukeBestand,dialect='excel')
-    writer.writerow(fieldnames)
+    writer.writerow(fieldnames2)
 
 def maakRicardoHeaders():
     ricardoBestand = open(csvRicardoBestand, 'a', newline='')
     writer = csv.writer(ricardoBestand,dialect='excel')
-    writer.writerow(fieldnames)
-
-def voegFrankKlantToe():    #Hebben nog input nodig welke film wordt geselecteerd
-    try:
-        frankBestand = open(csvFrankBestand, 'a', newline='')
-        writer = csv.DictWriter(frankBestand,delimiter=',', fieldnames=fieldnames)
-        writer.writerow({"naam": Klant.huidigNaam, "achternaam": Klant.huidigAchternaam, "film":input})
-    finally:
-        frankBestand.close()
+    writer.writerow(fieldnames2)
 
 #Maakt lijsten van de films van die dag
 i=0
@@ -64,6 +56,27 @@ genereerCode()
 FilmsOphalen.GetStart()
 
 #Aanschaf knop, voegt gebruikersnaam toe aan ID van de film
-alleLijsten_van_de_films[0].append(FilmsOphalen.starttijd + " " + Klant.huidigAchternaam + " " + str(uniekeCode))
+#alleLijsten_van_de_films[0].append(FilmsOphalen.starttijd + " " + buttons.huidigAchternaam + " " + str(uniekeCode))
 
-print(sorted(alleLijsten_van_de_films[0]))
+#print(sorted(alleLijsten_van_de_films[0]))
+
+if os.path.isfile(csvFrankBestand) == True:
+    pass
+else:
+    maakFrankHeaders()
+if os.path.isfile(csvKevinBestand) == True:
+    pass
+else:
+    maakKevinHeaders()
+if os.path.isfile(csvBramBestand) == True:
+    pass
+else:
+    maakBramHeaders()
+if os.path.isfile(csvJoukeBestand) == True:
+    pass
+else:
+    maakJoukeHeaders()
+if os.path.isfile(csvRicardoBestand) == True:
+    pass
+else:
+    maakRicardoHeaders()
