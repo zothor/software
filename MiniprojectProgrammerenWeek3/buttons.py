@@ -1,8 +1,9 @@
-__author__ = 'Bram + Frank'
+__author__ = 'Bram + Frank + Ricardo + Kevin + Jouke-bouwe'
 import csv
 from tkinter import *
 from MiniprojectProgrammerenWeek3 import FilmsOphalen, Aankoop
 
+#Verwijst naar de csv bestanden die gebruikt worden. Moet worden aangepast als deze op een andere pc wordt uitgevoerd
 csvKlantBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
 csvFrankBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/frankBestand.csv'
 csvKevinBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/kevinBestand.csv'
@@ -10,10 +11,12 @@ csvBramBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammeren
 csvJoukeBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/joukeBestand.csv'
 csvRicardoBestand = 'C:/Users/Rica/PycharmProjects/software/MiniprojectProgrammerenWeek3/ricardoBestand.csv'
 
+'''Variabelen die gebruikt werden in de loop die buttons zou maken
 #variablen om films op te halen
 naarbeneden = 330
 opgehaaldefilm=0
 alleFilmButtons = []
+'''
 
 #variabelen voor het opslaan wie is ingelogd
 huidigEmail = ""
@@ -21,16 +24,22 @@ huidigNaam = ""
 huidigAchternaam = ""
 ingelogdOfNiet = False
 
+#Variabelen die gebruikt worden om film informatie te tonen
 labelnaam = ""
 labelfilm = ""
 labelduur = ""
 
-#de dementsies van het scherm
+#maakt het hoofdscherm aan
 root = Tk()
-#fieldnames voor het opslaan in csv bestand
+root["bg"] = "grey"
+root.wm_title("Movie-Net")
+root.resizable(width= False, height= True)
+root.geometry("1200x720+0+0")
+
+#fieldnames voor het opslaan van key values in csv bestand
 fieldnames = ["email", "wachtwoord", "naam", "achternaam"]
 
-#maakt header aan
+#maakt header aan van het bestand waar klantinformatie wordt opgeslagen
 def maakDictionaryHeaders():
     klantBestand = open(csvKlantBestand, 'a', newline='')
     writer = csv.writer(klantBestand,dialect='excel')
@@ -46,24 +55,19 @@ Password2 = StringVar()
 login1 = StringVar()
 login2 = StringVar()
 
-root["bg"] = "grey"
-root.wm_title("Movie-Net")
-root.resizable(width= False, height= True)
-root.geometry("1200x720+0+0")
-
-#de achtergrond
-
+#het achtergrond plaatje
 canvas = Canvas( width = 300, height = 200, bg = 'Gray')
 canvas.pack( expand = YES, fill = BOTH)
 gif1 = PhotoImage(file = 'achtergrond.gif')
 canvas.create_image(0, 0, image = gif1, anchor = NW)
 
-#de werking van de knopen
+#de werking van de knoppen op het inlogscherm
 def inlogscherm():
     top = Toplevel()
     top.title("login")
     top["bg"] = "grey"
 
+    #Leest de inputs van de gebruiker
     login = Button(top, text = "login", command = (lambda: leesUit(top)))
     login.grid(row = 3, columnspan = 2)
     label_1 = Label(top, text = "Email", bg = "grey", fg = "white")
@@ -75,7 +79,8 @@ def inlogscherm():
     label_2.grid(row = 1, sticky = W)
     entry_1.grid(row = 0, column = 1)
     entry_2.grid(row = 1, column = 1)
-#scherm voor het invullen van gegevens
+
+#scherm voor het invullen van gegevens voor registreren
 def registreren():
     top = Toplevel()
     top.title("Register")
@@ -120,7 +125,7 @@ def registreren():
     submit.grid(row = 6, columnspan = 2)
 
 
-#slaat de tekst op in csv bestand
+#slaat de gebruikersinformatie op in csv bestand
 def opslaan(top):
     global naam
     top.destroy()
@@ -130,6 +135,7 @@ def opslaan(top):
     wachtwoord = Password.get()
     wachtwoord2 = Password2.get()
 
+    #Controleert of het wachtwoord 2 keer goed is ingevoerd
     if wachtwoord == wachtwoord2:
         try:
             klantBestand = open(csvKlantBestand, 'a', newline='')
@@ -142,13 +148,14 @@ def opslaan(top):
     else:
         print("Wachtwoord komt niet overeen")
 
+#Nieuw hoofdscherm na inloggen
 def welkomtekst():
     user = Canvas(root,width = 400, height = 100)
     user.create_rectangle(400, 200, 0 , 0, fill = "red")
     user.create_text(190, 50,text = ("Welcome " + huidigNaam ), fill = "white", font = ("broadway", 20))
     user.place(x = 10, y = 10)
 
-#controle inloggen
+#Leest de opgeslagen gegevens uit het csv bestand
 def leesUit(top):
 
     global inlogEmail
@@ -170,7 +177,7 @@ def leesUit(top):
                 huidigEmail = row["email"]
                 huidigNaam = row["naam"]
                 huidigAchternaam = row["achternaam"]
-                #cleard het scherm
+                #cleart het scherm
                 global buton_1
                 global buton_2
                 global today
@@ -193,21 +200,21 @@ def leesUit(top):
 
 
 
-#de knopen voor het inloggen
+#de knoppen voor het inloggen en registreren aanmaken op het hoofdscherm
 buton_1 = Button(root, text = " login   ", command = inlogscherm, bg = "red", fg = "white", width = 10 ,height = 1, font = ("broadway", 12))
 buton_2 = Button(root, text = "register", command = registreren, bg = "red", fg = "white", width = 10, height = 1, font = ("broadway", 12))
 
 buton_1.place(x = 800, y = 30)
 buton_2.place(x = 800, y = 80)
 
-#welkomst tekst
+#De layout instellen van het hoofdscherm
 w = Canvas(root,width = 400, height = 100)
 w.create_rectangle(400, 200, 0 , 0, fill = "red")
 w.create_text(190, 50,text = "Welcome to Movie-Net", fill = "white", font = ("broadway", 20))
 w.place(x = 10, y = 10)
 
+#de balk met het aan bod vandaag
 def today():
-    #de balk met het aan bod vandaag
     today = Canvas(root,width = 1100, height = 50)
     today.create_rectangle(1100, 50, 0, 0, fill = "red")
     today.create_text(100, 25,text = "Today on Movie-Net", fill = "white", font = ("broadway", 12))
@@ -217,25 +224,28 @@ def today():
 
 
 def filmsOphalen():
+    ''' Dit was de code om de buttons met een loop te maken, maar het is ons niet gelukt om hier mee te werken
     global opgehaaldefilm, naarbeneden,alleFilmButtons
 
-    #attributen voor het ophalen van de films
-    #nummersToevoegen =0
+    attributen voor het ophalen van de films
+    nummersToevoegen =0
 
-    #while opgehaaldefilm <len(FilmsOphalen.titelFilms):
-        #j = opgehaaldefilm
-        #alleFilmButtonsNummers = alleFilmButtons.append(nummersToevoegen)
-        #naamButton = "Button" + str(j)
-        #naamButton = Button(root, text=FilmsOphalen.titelFilms[opgehaaldefilm], bg = "red", fg = "white", font = ("broadway", 12))
+    while opgehaaldefilm <len(FilmsOphalen.titelFilms):
+        j = opgehaaldefilm
+        alleFilmButtonsNummers = alleFilmButtons.append(nummersToevoegen)
+        naamButton = "Button" + str(j)
+        naamButton = Button(root, text=FilmsOphalen.titelFilms[opgehaaldefilm], bg = "red", fg = "white", font = ("broadway", 12))
 
-        #labelLengteFilm = Label(root, text= ("Duur: " + str(FilmsOphalen.lengteFilms[opgehaaldefilm])))
-        #labelLengteFilm.place(x=500, y=naarbeneden)
+        labelLengteFilm = Label(root, text= ("Duur: " + str(FilmsOphalen.lengteFilms[opgehaaldefilm])))
+        labelLengteFilm.place(x=500, y=naarbeneden)
 
-        #naamButton.place(x = 20, y = naarbeneden)
-        #opgehaaldefilm+=1
-        #naarbeneden += 35
-        #nummersToevoegen +=1
+        naamButton.place(x = 20, y = naarbeneden)
+        opgehaaldefilm+=1
+        naarbeneden += 35
+        nummersToevoegen +=1
+        '''
 
+    #Maakt alle knoppen hardcoded aan :(
     try :
         Button1 = Button(root, text=FilmsOphalen.titelFilms[0], bg = "red", fg = "white", font = ("broadway", 12), command=(lambda:laatBeschrijvingZien(0)))
         Button1.place(x = 20, y = 230, width=350)
@@ -268,13 +278,13 @@ def filmsOphalen():
     except :
         pass
 
-    #labelfilm1 = Label(root,text=FilmsOphalen.alleBeschrijvingen[0],wraplength=700, anchor=W, justify=LEFT, bg="black", fg="white")
-    #labelfilm1.place(x=400, y=250)
-
+#Haalt de beschrijving van de film op en laat de koop knop zien
 def laatBeschrijvingZien(filmnummer):
     global labelnaam
     global labelfilm
     global labelduur
+
+    #Verwijdert de oude label als deze bestaat, anders overlappen ze elkaar
     if labelnaam == "":
         pass
     else:
@@ -294,9 +304,10 @@ def laatBeschrijvingZien(filmnummer):
     labelfilm = Label(root,text=("Omschrijving : \n" + FilmsOphalen.alleBeschrijvingen[filmnummer]),wraplength=700, anchor=W, justify=LEFT, bg="black", fg="white")
     labelfilm.place(x=400, y=290, width=700)
     if ingelogdOfNiet == True:
-        koopbutton = Button(root, text="Kopen", bg = "red", fg = "white", font = ("broadway", 12), command =(lambda:filmKopen(filmnummer)))
+        koopbutton = Button(root, text="Purchase", bg = "red", fg = "white", font = ("broadway", 12), command =(lambda:filmKopen(filmnummer)))
         koopbutton.place(x=1000, y=600)
 
+#Voegt de aankoop toe aan het bestand van die aanbieder
 def filmKopen(filmnummer):
     if FilmsOphalen.alleAanbieders[filmnummer] == "Frank":
         voegFrankKlantToe(filmnummer)
@@ -312,6 +323,12 @@ def filmKopen(filmnummer):
 #Hieronder de functies die de klant informatie toevoegt aan de aanbieder's lijst
 def voegFrankKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt geselecteerd
     Aankoop.genereerCode()
+    kooptop = Toplevel()
+    kooptop.title("Purchase successful!")
+    kooptop.geometry("280x30+50+70")
+    kooptop["bg"] = "grey"
+    kooplabel = Label(kooptop, text=("Uw ticket code is : " + str(Aankoop.uniekeCode)), bg = "grey")
+    kooplabel.pack()
     try:
         global frankBestand
         frankBestand = open(Aankoop.csvFrankBestand, 'a', newline='')
@@ -322,6 +339,12 @@ def voegFrankKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt g
 
 def voegBramKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt geselecteerd
     Aankoop.genereerCode()
+    kooptop = Toplevel()
+    kooptop.title("Purchase successful!")
+    kooptop.geometry("280x30+50+70")
+    kooptop["bg"] = "grey"
+    kooplabel = Label(kooptop, text=("Uw ticket code is : " + str(Aankoop.uniekeCode)), bg = "grey")
+    kooplabel.pack()
     try:
         global bramBestand
         bramBestand = open(Aankoop.csvBramBestand, 'a', newline='')
@@ -332,6 +355,12 @@ def voegBramKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt ge
 
 def voegJoukeKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt geselecteerd
     Aankoop.genereerCode()
+    kooptop = Toplevel()
+    kooptop.title("Purchase successful!")
+    kooptop.geometry("280x30+50+70")
+    kooptop["bg"] = "grey"
+    kooplabel = Label(kooptop, text=("Uw ticket code is : " + str(Aankoop.uniekeCode)), bg = "grey")
+    kooplabel.pack()
     try:
         global joukeBestand
         joukeBestand = open(csvJoukeBestand, 'a', newline='')
@@ -342,6 +371,12 @@ def voegJoukeKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt g
 
 def voegKevinKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt geselecteerd
     Aankoop.genereerCode()
+    kooptop = Toplevel()
+    kooptop.title("Purchase successful!")
+    kooptop.geometry("280x30+50+70")
+    kooptop["bg"] = "grey"
+    kooplabel = Label(kooptop, text=("Uw ticket code is : " + str(Aankoop.uniekeCode)), bg = "grey")
+    kooplabel.pack()
     try:
         global kevinBestand
         kevinBestand = open(csvKevinBestand, 'a', newline='')
@@ -352,6 +387,12 @@ def voegKevinKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt g
 
 def voegRicardoKlantToe(filmnummer):    #Hebben nog input nodig welke film wordt geselecteerd
     Aankoop.genereerCode()
+    kooptop = Toplevel()
+    kooptop.title("Purchase successful!")
+    kooptop.geometry("280x30+50+70")
+    kooptop["bg"] = "grey"
+    kooplabel = Label(kooptop, text=("Uw ticket code is : " + str(Aankoop.uniekeCode)), bg = "grey")
+    kooplabel.pack()
     try:
         global ricardoBestand
         ricardoBestand = open(csvRicardoBestand, 'a', newline='')

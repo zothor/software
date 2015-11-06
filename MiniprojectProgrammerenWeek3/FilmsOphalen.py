@@ -1,15 +1,17 @@
-__author__ = 'Rica'
+__author__ = 'Ricardo + Jouke-bouwe'
 
 import requests
 from bs4 import BeautifulSoup
 import time
 
+#De functie geeft datum in MM-DD-YY, dit moeten wij aanpassen om met de API te laten werken
 AmerikaanseDatum = time.strftime('%x')
 DatumVandaag = AmerikaanseDatum[3:5] + "-" + AmerikaanseDatum[:2] + "-" + "20" + AmerikaanseDatum[6:]
 #DatumMorgen = str(int(AmerikaanseDatum[3:5])+1) + "-" + AmerikaanseDatum[:2] + "-" + "20" + AmerikaanseDatum[6:]
 
 URL = "http://www.filmtotaal.nl/api/filmsoptv.xml?apikey=yis8n3b7soomlixah6ut8e6pe93epn2u&dag=" + str(DatumVandaag) + "&sorteer=0"
 
+#Maakt lege variabelen aan waar we later mee gaan werken
 starttijd = ""
 titelFilms = []
 coversFilms = []
@@ -18,24 +20,7 @@ alleAanbieders = []
 alleJaartallen = []
 alleBeschrijvingen = []
 
-#Bij deze functie voegen wij alle informatie afkomstig van de XML pagina samen tot een geheel (bedoeling is om ook te gaan tekenen met deze functie)
-def printInformatie_van_een_film():
-    hoeveelFilms = len(titelFilms)
-    films = 0
-    statement = True
-
-
-    while statement:
-        if films < hoeveelFilms:
-            #print(str(films+1) + ': ' + str(titelFilms[films]) + " - " + coversFilms[films]+ " - "+ str(lengteFilms[films]) + " - " +
-                  #str(alleJaartallen[films]) + " - " + str(alleAanbieders[films]))
-            films += 1
-
-        else:
-            statement = False
-
-
-def GetTitels():    #Haalt filmtitel op
+def GetTitels():    #Haalt filmtitel op met behulp van BeautifulSoup en slaat deze op in een lijst
     source_code = requests.get(URL)
     plain_text = source_code.text
     soup = BeautifulSoup(plain_text, "html.parser")
@@ -118,15 +103,9 @@ def GetSynopsis(): #Haal film starttijd op
         alleBeschrijvingen.append(synopsis)
 
 
-#print("Hieronder alle titels die vandaag draaien:")
 GetTitels()
-#print("\n Hieronder vermelden we hoelang een film duurt:")
 GetLengtes()
-#print("\n hieronder worden de links van de covers benoemd:")
 GetCovers()
-#print("\n Hieronder de ratings van de films:")
 GetRatings()
-#print("\n De namen van de aanbieders staan hieronder:")
 getJaartal()
 GetSynopsis()
-printInformatie_van_een_film()

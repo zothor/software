@@ -1,9 +1,12 @@
-__author__ = 'jouke-bouwe'
+__author__ = 'Jouke-bouwe + Ricardo'
 
 from  MiniprojectProgrammerenWeek3 import FilmsOphalen
 
+#Deze klasse wordt op dit moment niet gebruikt. Het functioneerde als test om alle films van een aanbieder in een lijst te zetten.
+
 print (FilmsOphalen.alleAanbieders)
 
+#Maakt lege lijsten aan die later worden gevuld
 lijstFrank = []
 lijstKevin = []
 lijstJouke = []
@@ -12,6 +15,7 @@ lijstRicardo = []
 
 FilmsOphalen.getJaartal()
 
+#Doorloopt een loop die films aan de lijsten toevoegt tot de laatste film is behaald
 i=0
 while i < len(FilmsOphalen.titelFilms):
     if FilmsOphalen.alleAanbieders[i] == "Frank":
@@ -33,6 +37,7 @@ while i < len(FilmsOphalen.titelFilms):
         print("Het werkt niet")
         i += 1
 
+#Test of de lijsten werken
 print ("Frank : " + str(lijstFrank))
 print ("Kevin : " + str(lijstKevin))
 print ("Jouke-Bouwe : " + str(lijstJouke))
