@@ -1,6 +1,6 @@
 __author__ = 'Bram + Frank'
 import csv
-csvKlantBestand = 'C:/Users\Rica\PycharmProjects\software\MiniprojectProgrammerenWeek3\klantBestand.csv'
+csvKlantBestand = 'C:/Users/jouke-bouwe/Documents/School/software/MiniprojectProgrammerenWeek3/klantBestand.csv'
 from tkinter import *
 from MiniprojectProgrammerenWeek3 import FilmsOphalen
 
@@ -197,16 +197,27 @@ def today():
     today.place(x = 10, y = 250)
 
 def filmsOphalen():
+    global opgehaaldefilm, naarbeneden
     naarbeneden = 330
-    i=0
-    while i <len(FilmsOphalen.titelFilms):
-        j = i
+    opgehaaldefilm=0
+    while opgehaaldefilm <len(FilmsOphalen.titelFilms):
+        j = opgehaaldefilm
         global naamButton
         naamButton = ("Button" + str(j))
-        naamButton = Button(root, text=FilmsOphalen.titelFilms[i], bg = "red", fg = "white", font = ("broadway", 12))
-        i+=1
+        naamButton = Button(root, text=FilmsOphalen.titelFilms[opgehaaldefilm], command=informatieFilmPrinten, bg = "red", fg = "white", font = ("broadway", 12))
+        opgehaaldefilm+=1
         naamButton.place(x = 20, y = naarbeneden)
         naarbeneden += 35
+
+def informatieFilmPrinten():
+        labelTitelFilm = Label(root,filmsOphalen().titelFilms[(opgehaaldefilm+1)])
+        labelCoverFilm = Label(root,filmsOphalen().coversFilms[(opgehaaldefilm+1)])
+        labelLengteFilm = Label(root,filmsOphalen().lengteFilms[(opgehaaldefilm+1)])
+        labelTitelFilm.place(x=150, y= naarbeneden)
+        labelLengteFilm.place(x=150,y= naarbeneden)
+        labelCoverFilm.place(x=150, y= naarbeneden)
+        return labelLengteFilm
+
 
 today()
 filmsOphalen()
