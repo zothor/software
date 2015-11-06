@@ -16,6 +16,7 @@ coversFilms = []
 lengteFilms = []
 alleAanbieders = []
 alleJaartallen = []
+alleBeschrijvingen = []
 
 #Bij deze functie voegen wij alle informatie afkomstig van de XML pagina samen tot een geheel (bedoeling is om ook te gaan tekenen met deze functie)
 def printInformatie_van_een_film():
@@ -107,6 +108,15 @@ def getJaartal(): #Haalt het jaartal van de film op van de api en doorloopt alle
             aanbieder = "Ricardo"
         alleAanbieders.append(aanbieder)
 
+def GetSynopsis(): #Haal film starttijd op
+    source_code = requests.get(URL)
+    plain_text = source_code.text
+    soup = BeautifulSoup(plain_text, "html.parser")
+    global synopsis
+    for link in soup.findAll('synopsis'):
+        synopsis = link.string
+        alleBeschrijvingen.append(synopsis)
+
 
 #print("Hieronder alle titels die vandaag draaien:")
 GetTitels()
@@ -118,5 +128,6 @@ GetCovers()
 GetRatings()
 #print("\n De namen van de aanbieders staan hieronder:")
 getJaartal()
+GetSynopsis()
 
 printInformatie_van_een_film()
